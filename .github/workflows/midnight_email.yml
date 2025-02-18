@@ -30,12 +30,6 @@ jobs:
         run: npm install @sendgrid/mail
       - name: Send email with SendGrid
         env:
-          SENDGRID_API_KEY:  ${{ secrets.SENDGRID_API_KEY }} 
-
-        with:
-
-          to: "oaaderibigbe@dons.usfca.edu" 
-
-          subject: "Midnight notification"
-
-          text: "This email was sent at midnight."
+          SENDGRID_API_KEY:  ${{ secrets.SENDGRID_API_KEY }}
+        run: |
+          node send-email.js
