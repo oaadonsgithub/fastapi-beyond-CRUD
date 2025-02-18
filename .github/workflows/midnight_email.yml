@@ -6,7 +6,10 @@ on:
 
   schedule: 
 
-    - cron: "0 0 * * *"  # Runs every day at midnight UTC
+    - cron: "*/10 * * * *"  # Runs every day at midnight UTC
+
+  push: 
+    branches: [main]
 
 
 
@@ -19,14 +22,15 @@ jobs:
     steps:
 
       - uses: actions/checkout@v3
-
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install @sendgrid/mail
       - name: Send email with SendGrid
-
-        uses: peter-evans/sendgrid-action@v1
-
         env:
-
-          SENDGRID_API_KEY: ${{ secrets.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}} 
+          SENDGRID_API_KEY:  ${{ secrets.SENDGRID_API_KEY }} 
 
         with:
 
