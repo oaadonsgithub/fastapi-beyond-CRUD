@@ -1,0 +1,37 @@
+name: Nightly Build
+
+
+
+on:
+
+  schedule: 
+
+    - cron: "0 0 * * *"  # Runs every day at midnight UTC
+
+
+
+jobs:
+
+  send_email:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Send email with SendGrid
+
+        uses: peter-evans/sendgrid-action@v1
+
+        env:
+
+          SENDGRID_API_KEY: ${{ secrets.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}} 
+
+        with:
+
+          to: "oaaderibigbe@dons.usfca.edu" 
+
+          subject: "Midnight notification"
+
+          text: "This email was sent at midnight."
