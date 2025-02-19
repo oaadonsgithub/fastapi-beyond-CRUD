@@ -11,9 +11,6 @@ sg = sendgrid.SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
 def send_email():
     today = datetime.today()
     week_number, year = today.isocalendar()[1], today.year
-   ]
-    positions_section = "".join(positions_html)
-    country = country.title()
     message = sendgrid.Mail(
         from_email=(os.environ.get("FROM_EMAIL"), "Email Notification"),
         to_emails=(os.environ.get("TO_EMAILS"), ""),
