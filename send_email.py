@@ -1,27 +1,17 @@
 import os
-from datetime import datetime
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
-import sendgrid
-from dotenv import load_dotenv
-
-load_dotenv()
-
-sg = sendgrid.SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
-
-def send_email():
-    today = datetime.today()
-    week_number, year = today.isocalendar()[1], today.year
-    message = sendgrid.Mail(
-        from_email=(os.environ.get("FROM_EMAIL"), "Email Notification"),
-        to_emails=(os.environ.get("TO_EMAILS"), ""),
-        subject=f"",
-        html_content=f"""
-  
-         """,
-    )
-    try:
-        sg.send(message)
-    except Exception as e:
-        print(f"Error sending email: {e}.")
-    else:
-        print("Email sent successfully")
+message = Mail(
+    from_email='oaausc@gmail.com',
+    to_emails='oaaderibigbe@usfca.edu',
+    subject='Hello from SendGrid',
+    html_content='<strong>Hello, Email!</strong>')
+try:
+    sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+    response = sg.send(message)
+    print(f"Status Code: {response.status_code}")
+    print(f"Body: {response.body}")
+    print(f"Headers: {response.headers}")
+except Exception as e:
+    print(f"Error: {e}")
