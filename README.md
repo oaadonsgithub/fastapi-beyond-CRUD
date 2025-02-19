@@ -55,6 +55,7 @@ Ensure you have the following installed:
     alembic upgrade head
     ```
 
+#### had validation error
 7. Open a new terminal and ensure your virtual environment is active. Start the Celery worker (Linux/Unix shell):
     ```bash
     sh runworker.sh
